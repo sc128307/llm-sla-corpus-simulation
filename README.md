@@ -30,9 +30,3 @@ LLM-Simulated Learner English across Four Intervention Conditions*.
    ICNALE data.
 3. Run the pipeline stages in order (generation → feature extraction →
    statistics / L1 classifier). Each script documents its CLI arguments.
-
-## Note on data
-
-The ICNALE corpus (copyrighted) and the generated synthetic corpora are not
-committed; they are produced or obtained by running the pipeline. Model
-weights (DeBERTa, RoBERTa-CoLA, stanza) are downloaded separately.
