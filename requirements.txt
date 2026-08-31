@@ -1,0 +1,35 @@
+openai
+pandas
+numpy
+scipy
+spacy
+matplotlib
+seaborn
+tqdm
+pyyaml
+python-dotenv
+requests
+textstat
+
+# Feature extraction / L1 classification
+transformers
+torch
+scikit-learn
+pyarrow
+huggingface_hub
+
+# Optional (high-quality grammar engine): a running LanguageTool HTTP server,
+# e.g. docker run -p 8010:8010 erikvl87/languagetool. Pass its URL as
+# server_url= to LinguisticAuditor (src/metrics.py). Without it, the built-in
+# rule-based engine (v1.0) is used — deterministic, but record the engine +
+# version in the method section.
+# language_tool_python
+
+# spacy model (after pip install spacy):
+#   python -m spacy download en_core_web_sm
+#   (override with SPACY_MODEL env var, e.g. en_core_web_trf for higher accuracy)
+
+# neosca (constituency parser for MLT / clause-per-sentence):
+#   git+https://github.com/tanloong/neosca  (see docs; requires stanza models)
+# stanza models: download en_combine (tokenize,pos,constituency) to
+#   data/outputs/stanza_resources/ and set STANZA_MODEL_DIR in libs/neosca/ns_consts.py
