@@ -186,7 +186,6 @@ def main() -> None:
     all_regions = sorted(human["region"].dropna().unique())
     l2_regions = [region for region in all_regions if region != "ENS"]
     run_analysis(df, "l2_primary", l2_regions, "signflip_inference_primary.csv", 0)
-    run_analysis(df, "with_ens_sensitivity", all_regions, "signflip_inference_with_ens.csv", 1)
 
 
 if __name__ == "__main__":

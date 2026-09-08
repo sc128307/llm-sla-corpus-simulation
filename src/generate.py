@@ -9,8 +9,8 @@ Batch lane (OpenAI-compatible /v1/batches, used by OpenAI official and
 DashScope compatible-mode):
   python -m src.generate --batch-action submit    # build JSONL + submit, save job ids
   python -m src.generate --batch-action retrieve  # poll jobs, download, convert to CSV
-The command-line lane is selected from the model configuration; do not infer
-provider or model identity from this module's historical examples.
+The command-line lane is selected from the model configuration; provider and
+model identity are never inferred from code defaults.
 
 Design invariants (also summarised in the release README):
   - Canonical baseline via src.data_loader.load_human_baseline()
@@ -78,21 +78,12 @@ PROVIDERS = {
 # lane is batch, list prices otherwise. Estimates only; exact cost comes
 # from provider invoices. Prices quoted by user 2026-08-22 where noted.
 PRICING = {
-    "gpt-5.6-luna": (0.10, 0.60),                     # OpenAI official batch est. (50% off)
-    "gpt-5.6-luna-pro": (0.10, 0.60),                 # alias (legacy ref)
-    "openai/gpt-5.6-luna-pro:batch": (0.20, 1.20),    # OpenRouter batch (legacy ref)
-    "openai/gpt-5.6-sol-pro:batch": (1.00, 5.00),     # legacy (superseded by luna-pro)
-    "google/gemini-2.5-flash:batch": (0.15, 1.25),    # OpenRouter batch
-    "google/gemini-3.7-flash:batch": (0.1875, 0.9375),  # legacy (mandatory reasoning)
-    "google/gemini-3.7-flash": (0.375, 1.875),        # fallback (no :batch)
-    "deepseek-chat": (0.06, 0.12),                    # legacy (est.)
-    "deepseek-v4-flash": (0.06, 0.12),                # official ≈ (est.; off-peak lower)
-    "qwen-plus": (0.06, 0.14),                        # legacy DashScope batch est.
-    "qwen3.8-max": (1.00, 3.00),                      # legacy (superseded by 3.7-plus)
-    "qwen3.7-plus": (0.16, 0.64),                     # DashScope batch est. 50% off
-    "meta-llama/llama-4-maverick": (0.20, 0.80),      # OpenRouter
-    "minimax/minimax-m3:batch": (0.30, 1.20),         # OpenRouter batch
-    "moonshotai/kimi-k2.5": (0.45, 2.25),             # OpenRouter (spare)
+    "gpt-5.6-luna": (0.10, 0.60),
+    "google/gemini-2.5-flash:batch": (0.15, 1.25),
+    "deepseek-v4-flash": (0.06, 0.12),
+    "qwen3.7-plus": (0.16, 0.64),
+    "meta-llama/llama-4-maverick": (0.20, 0.80),
+    "minimax/minimax-m3": (0.30, 1.20),
 }
 
 TEMPERATURE = 0.7
@@ -741,7 +732,7 @@ def main():
                     help="generate only the first N essays (smoke test)")
     ap.add_argument("--per-cell", type=int, default=None,
                     help="stratified validation: sample N essays from EACH "
-                         "(region, topic) cell (seed-fixed), so all 11 "
+                         "(region, topic) cell (seed-fixed), so all configured "
                          "regions x 2 topics are represented — needed to "
                          "test the L1-signal claim (--limit would only give "
                          "the first region).")

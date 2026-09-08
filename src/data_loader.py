@@ -12,8 +12,8 @@ HUMAN_BASELINE_PATH = str(HUMAN_PATH)
 def load_human_baseline(path: str = None) -> pd.DataFrame:
     """Load the canonical human baseline with a stable schema.
 
-    Guarantees the columns ``id`` and ``region`` exist (renames legacy
-    ``text_id`` -> ``id`` and ``nationality`` -> ``region`` when needed),
+    Guarantees the columns ``id`` and ``region`` exist (accepting the
+    alternate input names ``text_id`` and ``nationality`` when needed),
     so callers never have to branch on column names again.
 
     Args:

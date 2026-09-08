@@ -1,19 +1,15 @@
 # ==========================================================
-# 实验提示词配置 (CSH Rewrite - Prompt-Intervention Conditions)
-#
-# 实验因素：四个类别型提示条件（不作连续“干预剂量”解释）
-#   C0 zero_shot  — 极简 persona 注入（原有基线，保持不变）
-#   C1 one_shot   — + 1 篇真实学习者范文 (exemplar)
-#   C2 few_shot   — + k 篇真实学习者范文 (exemplars)
-#   C3 cot        — + 显式学习者特征规划指令（仅提示层；不输出推理）
+# Prompt configuration for the four categorical intervention blocks.
+# C0 is zero-shot; C1 adds one exemplar; C2 adds few exemplars; C3 adds
+# an explicit learner-feature planning instruction without exposing reasoning.
 #
 # 变量契约（所有条件共用，保证干预程度是唯一自变量）：
 #   {identity_block}    身份块（identity_definitions.Learner/Native，已格式化国家名）
 #   {topic}             作文题目 ("Part-time Job" / "Smoking Ban")
 #   {region}            地区代码 (CHN, THA, ...)，规划指令用
 #   {region_name}       地区全称（persona_mapping），exemplar 标签用
-#   {exemplar_source_desc}  "whose English is their second language"（学习者）
-#                       或 "a native English speaker"（ENS）——修复 2026-08-28
+#   {exemplar_source_desc}  "whose English is their second language" (learner)
+#                       or "a native English speaker" (ENS)
 #   {exemplar}          ONE 篇真实 ICNALE 作文全文（来自 exemplar_pool，
 #                       禁止使用 split_manifest 中 split=test 的行 —— 防泄漏）
 #   {exemplars}         k 篇真实作文全文（调用方自行拼接，见 few_shot_k）
@@ -28,10 +24,7 @@ identity_definitions:
     You are a university student from the United States.
     English is your native language (L1).
 
-# ----------------------------------------------------------
-# 兼容层：旧脚本 (generator.py / together_batch.py) 使用的
-# zero-shot 模板。新代码请改用 conditions.zero_shot（内容一致）。
-# ----------------------------------------------------------
+# Shared zero-shot template.
 universal_prompt:
   system: >
     {identity_block}
@@ -134,9 +127,9 @@ conditions:
 
   cot:
     description: "C3 — 基线 + 显式学习者特征规划指令（仅输出作文，不输出推理）"
-    # Historical key `cot` is retained for data compatibility. This is a
-    # prompt-level planning instruction; provider-side reasoning/thinking is
-    # disabled separately in configs/models.yaml.
+    # The file key `cot` denotes a prompt-level planning instruction;
+    # provider-side reasoning/thinking is disabled separately in
+    # configs/models.yaml.
     system: >
       {identity_block}
       

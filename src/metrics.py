@@ -70,8 +70,8 @@ GRAMMAR_ENGINE_RULE_BASED = "rule-based-fallback"
 GRAMMAR_ENGINE_AUTO = "auto"
 
 # Fine-tuned acceptability model (trained by scripts/train_grammar_cola.py).
-# The checked-in model artifact is currently nested one level deeper than the
-# historical default output directory.  Resolve both layouts so a local
+# The model artifact may be nested one level deeper than the
+# default output directory. Resolve both layouts so a local
 # feature rerun uses the same intended engine instead of silently falling back
 # to the rule-based proxy.
 GRAMMAR_MODEL_DIR = PROJECT_ROOT / "models" / "grammar_cola"

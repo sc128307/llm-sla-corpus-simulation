@@ -12,7 +12,6 @@ ROOT = Path(__file__).resolve().parent.parent
 RESULTS = ROOT / "results"
 SOURCES = [
     (RESULTS / "l1_dataset", RESULTS / "l1_dataset_anonymized"),
-    (RESULTS / "l1_dataset_ens", RESULTS / "l1_dataset_ens_anonymized"),
 ]
 
 

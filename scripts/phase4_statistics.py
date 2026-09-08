@@ -2,7 +2,7 @@
 
 Primary estimand: ten L2 regions, with 100 unique (region, topic) keys per
 cell (200 keys per region), followed by paired bootstrap with replacement
-within each region x topic stratum. ENS is a separate sensitivity analysis.
+within each region x topic stratum.
 """
 import sys
 import os
@@ -274,9 +274,5 @@ def run_analysis(label, regions, summary_path, effect_path, jsd_path,
 run_analysis("l2_primary", l2_regions, "bootstrap_summary.csv",
              "effect_sizes.csv", "jensen_shannon.csv",
              "jensen_shannon_region.csv")
-run_analysis("with_ens_sensitivity", all_regions,
-             "bootstrap_summary_with_ens.csv", "effect_sizes_with_ens.csv",
-             "jensen_shannon_with_ens.csv",
-             "jensen_shannon_region_with_ens.csv")
 
 print("\nDONE — Phase 4 statistics complete")

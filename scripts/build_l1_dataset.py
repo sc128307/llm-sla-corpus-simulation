@@ -1,8 +1,7 @@
 """Build leak-controlled L1 classification datasets.
 
-The primary dataset is a 10-class L2-region task. A separate 11-class
-dataset, including ENS, is built for sensitivity analysis. The generated
-corpus is never modified; only local dataset parquet files are written.
+The dataset is a 10-class L2-region task. The generated corpus is never
+modified; only local dataset parquet files are written.
 
 For each task:
   * per-condition sources are mirror-matched to the human-pool regional prior;
@@ -55,7 +54,6 @@ MODELS = [
 CONDS = ["zero_shot", "one_shot", "few_shot", "cot"]  # cot = manuscript C3
 
 PRIMARY_DIR = RESULTS_DIR / "l1_dataset"
-ENS_DIR = RESULTS_DIR / "l1_dataset_ens"
 
 
 def key_series(df):
@@ -160,11 +158,9 @@ def make_dataset(name, source_df, human_test, target_dist, text_col):
     ], ignore_index=True), label2id
 
 
-def write_task(task_dir, include_ens, split_manifest, gen_cache):
+def write_task(task_dir, split_manifest, gen_cache):
     task_dir.mkdir(parents=True, exist_ok=True)
-    target_regions = sorted(split_manifest["region"].unique())
-    if not include_ens:
-        target_regions = [r for r in target_regions if r != "ENS"]
+    target_regions = [r for r in sorted(split_manifest["region"].unique()) if r != "ENS"]
 
     human_pool = split_manifest[
         (split_manifest["split"] == "pool")
@@ -180,7 +176,7 @@ def write_task(task_dir, include_ens, split_manifest, gen_cache):
     )
 
     def get_gen(model, cond):
-        cache_key = (model, cond, include_ens)
+        cache_key = (model, cond)
         if cache_key not in gen_cache:
             df = pd.read_csv(generated_path(model, cond))
             row_keys = df["source_id"].astype(str) + "|" + df["topic"].astype(str)
@@ -199,7 +195,7 @@ def write_task(task_dir, include_ens, split_manifest, gen_cache):
     human_source = human_pool.rename(columns={"text": "generated_text"})
     save("oracle_human", human_source, "generated_text")
 
-    # Per-condition sources plus two optional pooled source designs.
+    # Per-condition sources plus two pooled source designs.
     for model in MODELS:
         for cond in CONDS:
             save(f"sim_{model}_{cond}", get_gen(model, cond), "generated_text")
@@ -238,9 +234,8 @@ def write_task(task_dir, include_ens, split_manifest, gen_cache):
         )
 
     manifest = {
-        "task": "11_class_with_ens_sensitivity" if include_ens else "10_class_l2_primary",
+        "task": "10_class_l2_primary",
         "regions": target_regions,
-        "include_ens": include_ens,
         "mirror_target": target_dist,
         "human_pool_size": int(len(human_pool)),
         "human_test_size": int(len(human_test)),
@@ -264,11 +259,9 @@ def main():
     sm = pd.read_csv(SPLIT_MANIFEST_PATH)
     gen_cache = {}
     # Replace only derived dataset directories. Source corpora are untouched.
-    for task_dir in (PRIMARY_DIR, ENS_DIR):
-        if task_dir.exists():
-            shutil.rmtree(task_dir)
-    write_task(PRIMARY_DIR, include_ens=False, split_manifest=sm, gen_cache=gen_cache)
-    write_task(ENS_DIR, include_ens=True, split_manifest=sm, gen_cache=gen_cache)
+    if PRIMARY_DIR.exists():
+        shutil.rmtree(PRIMARY_DIR)
+    write_task(PRIMARY_DIR, split_manifest=sm, gen_cache=gen_cache)
 
 
 if __name__ == "__main__":

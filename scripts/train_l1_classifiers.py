@@ -134,7 +134,7 @@ def train_one(name, df):
     tokenizer = AutoTokenizer.from_pretrained(
         MODEL_PATH, local_files_only=True, use_fast=False
     )
-    # label mapping from dataset (assume 11 classes stored as ints)
+    # Derive the classifier head size from the dataset labels.
     n_labels = df["label"].max() + 1
     # Transformers 4.57.1 forwards unknown constructor kwargs to the
     # DeBERTa class, which rejects ``num_labels``.  Set it on the config and
