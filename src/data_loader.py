@@ -2,15 +2,11 @@ import os
 import re
 import zipfile
 import pandas as pd
+from .paths import HUMAN_PATH
 
-# Canonical human baseline (see data/README.md). Everything that needs the
-# human essays should load through load_human_baseline() or this constant.
-HUMAN_BASELINE_PATH = os.path.join(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-    "data",
-    "interim",
-    "human_data_full.csv",
-)
+# Canonical human baseline. Everything that needs the human essays should load
+# through load_human_baseline() or this constant.
+HUMAN_BASELINE_PATH = str(HUMAN_PATH)
 
 
 def load_human_baseline(path: str = None) -> pd.DataFrame:
@@ -21,7 +17,7 @@ def load_human_baseline(path: str = None) -> pd.DataFrame:
     so callers never have to branch on column names again.
 
     Args:
-        path: optional override; defaults to data/interim/human_data_full.csv
+        path: optional override; defaults to corpus/human/human_data_full.csv
     """
     csv_path = path or HUMAN_BASELINE_PATH
     if not os.path.exists(csv_path):
@@ -48,7 +44,7 @@ class ICNALELoader:
     Loader for ICNALE_WE (Written Essays), covering the 11 target
     regions/countries. Reads either an extracted directory or — if the
     extracted folder is absent — directly from the zip archive
-    (``data/raw/ICNALE_WE.zip``), so the raw data never needs to be
+    (``corpus/raw/ICNALE_WE.zip``), so the raw data never needs to be
     unpacked on disk.
     """
 
@@ -167,10 +163,8 @@ if __name__ == "__main__":
     import sys
 
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    raw_path = os.path.join(base_dir, "data", "raw", "ICNALE_WE")
-    canonical_path = os.path.join(
-        base_dir, "data", "interim", "human_data_full.csv"
-    )
+    raw_path = os.path.join(base_dir, "corpus", "raw", "ICNALE_WE")
+    canonical_path = str(HUMAN_PATH)
 
     loader = ICNALELoader(raw_path)
     df = loader.load_data()

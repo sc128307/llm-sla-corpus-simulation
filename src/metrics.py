@@ -1,8 +1,8 @@
 # ==========================================================
 # src/metrics.py — Linguistic feature extraction (Biber 1988 framework)
 #
-# Promoted from notebooks/linguistic_lib.py (Phase 0, docs/ENGINEERING_PLAN.md).
-# Changes vs. the old notebook module:
+# Core linguistic feature extraction module used by the release workflow.
+# Implementation notes:
 #   1. Lazy spaCy loading  — `import src.metrics` works even without spaCy;
 #      the model is loaded on first use and can be overridden with the
 #      SPACY_MODEL env var (default: en_core_web_sm).
@@ -10,10 +10,10 @@
 #      named engine (LanguageTool HTTP server, or the built-in rule-based
 #      fallback) and never silently 0. The active engine + version are exposed
 #      on the auditor so the paper's method section can record them exactly.
-#   3. CEFR vocab resolves to the canonical data/processed/cefr_full_vocab.csv
+#   3. CEFR vocab resolves to a user-supplied cefr_full_vocab.csv
 #      by default (the old module silently returned AVD = 0 when missing).
 #
-# Backward-compatible surface (kept identical for notebooks/pipeline_new.ipynb):
+# Public surface used by the workflow scripts:
 #   DataPreprocessor(), LinguisticAuditor(vocab_dir=..., server_url=...),
 #   DISCOURSE_MARKERS, NOMINALIZATION_SUFFIXES, VOCAB_FILENAME,
 #   analyze_sample() output keys.
@@ -34,9 +34,11 @@ logger.addHandler(logging.NullHandler())
 VOCAB_FILENAME = "cefr_full_vocab.csv"
 SPACY_MODEL = os.getenv("SPACY_MODEL", "en_core_web_sm")
 
-# Where the canonical CEFR lexicon lives (project-root relative).
+# The CEFR lexicon is an external, user-supplied resource. Set CEFR_VOCAB_DIR
+# to the directory containing cefr_full_vocab.csv.
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_VOCAB_PATH = PROJECT_ROOT / "data" / "processed" / VOCAB_FILENAME
+DEFAULT_VOCAB_PATH = Path(os.getenv("CEFR_VOCAB_DIR",
+                                   str(PROJECT_ROOT / "cefr_vocab"))) / VOCAB_FILENAME
 
 # Biber (1988) & Halliday (1976) lists (unchanged from linguistic_lib.py)
 DISCOURSE_MARKERS = {
@@ -60,15 +62,22 @@ NOMINALIZATION_SUFFIXES = (
 # Engine identifiers recorded for the method section.
 # Priority (auto): roberta-cola (fine-tuned on CoLA, models/grammar_cola)
 #   > languagetool-http-server (server_url) > rule-based-fallback.
-# Theory: Lau et al. 2017 (acceptability is a probabilistic continuum);
-# Warstadt et al. 2019 (CoLA). See docs/METHODOLOGY_JUSTIFICATION.md §5.1.
+# Theory: acceptability is treated as a probabilistic continuum; the optional
+# CoLA-fine-tuned model is selected when available locally.
 GRAMMAR_ENGINE_ROBERTA_COLA = "roberta-cola"
 GRAMMAR_ENGINE_LANGUAGETOOL = "languagetool-http-server"
 GRAMMAR_ENGINE_RULE_BASED = "rule-based-fallback"
 GRAMMAR_ENGINE_AUTO = "auto"
 
 # Fine-tuned acceptability model (trained by scripts/train_grammar_cola.py).
+# The checked-in model artifact is currently nested one level deeper than the
+# historical default output directory.  Resolve both layouts so a local
+# feature rerun uses the same intended engine instead of silently falling back
+# to the rule-based proxy.
 GRAMMAR_MODEL_DIR = PROJECT_ROOT / "models" / "grammar_cola"
+if (not (GRAMMAR_MODEL_DIR / "config.json").exists() and
+        (GRAMMAR_MODEL_DIR / "grammar_cola" / "config.json").exists()):
+    GRAMMAR_MODEL_DIR = GRAMMAR_MODEL_DIR / "grammar_cola"
 
 # Version of the built-in rule set (fallback only).
 RULE_BASED_ENGINE_VERSION = "1.0"
@@ -246,7 +255,7 @@ class LinguisticAuditor:
 
     Args:
         vocab_dir: directory containing ``cefr_full_vocab.csv``. Defaults to
-            the canonical ``data/processed/`` directory.
+            the directory specified by ``CEFR_VOCAB_DIR``.
         server_url: optional LanguageTool HTTP server (e.g.
             ``http://localhost:8010/v2/``). When provided, grammar errors are
             counted by the server; otherwise the built-in rule-based engine
@@ -588,7 +597,7 @@ class LinguisticAuditor:
             fkgl = 0.0
 
         # NOTE: output keys are kept identical to the old
-        # notebooks/linguistic_lib.py so downstream notebooks keep working.
+        # Preserve stable feature names for downstream analysis scripts.
         return {
             "Word_Count": word_count,
             "Sentence_Length": word_count / sent_count if sent_count else 0,

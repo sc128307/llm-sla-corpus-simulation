@@ -1,21 +1,25 @@
 """Phase 4 neosca feature extraction: MLT + Clause_per_Sentence on ALL texts.
 
-Runs in neosca_clean env (CUDA torch + stanza 1.14.0 + neosca in libs/ + pandas).
-  - input:  data/results/features_all.parquet (keys from nlp-corpus run)
-  - output: data/results/neosca_{A,B}.csv (appended every CHECKPOINT rows)
-  - resume: data/results/neosca_{A,B}_done.json
+Runs with a user-installed NeoSCA/Stanza environment. Set NEOSCA_HOME if the
+NeoSCA package is not on the normal Python path.
+  - input:  features/features_all.parquet (keys from feature run)
+  - output: results/neosca_{A,B}.csv (appended every CHECKPOINT rows)
+  - resume: results/neosca_{A,B}_done.json
 Design: 2 GPU processes, incremental save, checkpoint resume, gc after file.
 Usage:  python scripts/extract_neosca_pandas.py A
 """
 import sys, os, time, json, gc
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, os.path.join(ROOT, "libs"))
+NEOSCA_HOME = os.getenv("NEOSCA_HOME")
+if NEOSCA_HOME:
+    sys.path.insert(0, NEOSCA_HOME)
 os.chdir(ROOT)
 sys.stdout.reconfigure(encoding="utf-8")
 
 import pandas as pd
+from src.paths import FEATURE_DIR, GENERATED_DIR, HUMAN_PATH, RESULTS_DIR, generated_path
 
-RES = "data/results"
+RES = str(RESULTS_DIR)
 CHECKPOINT = 100
 
 
@@ -63,7 +67,7 @@ def main():
     print(f"[neosca {which}] resume: {len(done)} done", flush=True)
 
     # keys from feature matrix
-    feat = pd.read_parquet(os.path.join(RES, "features_all.parquet"),
+    feat = pd.read_parquet(FEATURE_DIR / "features_all.parquet",
                            columns=["key", "region", "topic", "model",
                                     "condition"])
     if limit:
@@ -92,13 +96,12 @@ def main():
     groups = my_feat.groupby(["model", "condition"])
     for (model, cond), g in groups:
         if model == "HUMAN":
-            h = pd.read_csv("data/interim/human_data_full.csv")
+            h = pd.read_csv(HUMAN_PATH)
             text_by_key = {f"{r['id']}|{r['topic']}": str(r["text"])
                            for _, r in h.iterrows()}
             label = "HUMAN"
         else:
-            path = os.path.join("data/raw/LLM_Generations",
-                                f"Corpus_{model}_{cond}.csv")
+            path = str(generated_path(model, cond))
             df = pd.read_csv(path, usecols=["source_id", "topic",
                                             "generated_text"])
             text_by_key = {f"{r['source_id']}|{r['topic']}":

@@ -1,6 +1,7 @@
 """Fine-tune a grammatical-acceptability classifier (RoBERTa on CoLA).
 
-Theory (see docs/METHODOLOGY_JUSTIFICATION.md §5.1 + Zotero notes):
+Theoretical basis: acceptability is treated as a probabilistic continuum and
+the CoLA-trained classifier supplies a sentence-level acceptability score.
   Lau et al. 2017 — acceptability is a probabilistic continuum, not a
   discrete right/wrong; Warstadt et al. 2019 — neural classifiers can judge
   acceptability (CoLA). The grammar probe of the paper therefore uses a
@@ -41,11 +42,11 @@ from transformers import (  # noqa: E402
 from transformers import EarlyStoppingCallback  # noqa: E402
 
 COLA_URL = "https://nyu-mll.github.io/CoLA/cola_public_1.1.zip"
-COLA_DIR = os.path.join(ROOT, "data", "interim", "cola")
+COLA_DIR = os.path.join(ROOT, "corpus", "auxiliary", "cola")
 
 
 def ensure_cola():
-    """CoLA raw TSVs (nyu-mll, canonical source) -> data/interim/cola/.
+    """CoLA raw TSVs (nyu-mll, canonical source) -> corpus/auxiliary/cola/.
     Columns: sentence_source, label, label_name, sentence."""
     raw = os.path.join(COLA_DIR, "cola_public", "raw")
     train_f = os.path.join(raw, "in_domain_train.tsv")
@@ -176,7 +177,7 @@ def main():
         "date": time.strftime("%Y-%m-%d"),
         "device": device,
         "note": "sentence-level P(acceptable); grammar probe = mean over "
-                "sentences. See docs/METHODOLOGY_JUSTIFICATION.md",
+                "sentences; see the manuscript's methodology description",
     }
     with open(os.path.join(out_dir, "metadata.json"), "w",
               encoding="utf-8") as f:

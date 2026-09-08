@@ -2,12 +2,12 @@ models:
   # =========================================================
   # 6x4 阵容 v4 — 定稿 (2026-08-28，见 docs/MODEL_MATRIX.md)
   #
-  #  GPT-5.6-Luna-Pro    OpenRouter batch   ($0.2 / $1.2 每 M)
-  #  Gemini-3.7-Flash    OpenRouter batch   ($0.1875 / $0.9375 每 M)
+  #  GPT-5.6-Luna        OpenAI official batch
+  #  Gemini-2.5-Flash    OpenRouter batch
   #  DeepSeek-V4-Flash   官方 API           (谷值定价)
-  #  Qwen-3.8-Max        官方 DashScope     (按量付费 + batch)
+  #  Qwen-3.7-Plus       官方 DashScope     (按量付费 + batch)
   #  Llama-4-Maverick    OpenRouter realtime
-  #  MiniMax-M3          OpenRouter batch   ($0.3 / $1.2 每 M)
+  #  MiniMax-M3          OpenRouter realtime ($0.3 / $1.2 每 M)
   #
   # ⚠️ 内部推理全部禁用（方法学要求，见 METHODOLOGY_JUSTIFICATION.md）:
   #   OpenRouter 统一:  extra_body={"reasoning": {"enabled": false}}

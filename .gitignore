@@ -1,37 +1,15 @@
-# Secrets — never commit API keys.
+# Never commit local data, models, credentials, or generated outputs.
 .env
 *.env
-
-# Model weights and caches (large, downloaded separately).
+corpus/
+features/
 models/
-libs/neosca/
-.cache_hf/
-.hf_models/
-
-# Corpora (copyrighted ICNALE) and derived/raw outputs.
-data/
-
-# Temp / scratch / logs.
-*.tmp
-.tmp_*
-*.log
-result.csv
-
-# Python.
+results/
+figures/
+paper/
 __pycache__/
 *.py[cod]
-
-# LaTeX build artifacts.
-*.aux
-*.bbl
-*.blg
-*.fls
-*.out
-*.synctex.gz
-*.fdb_latexmk
-
-# Editors / OS.
-.vscode/
-.claude/
-.DS_Store
-Thumbs.db
+*.log
+*.tmp
+.pytest_cache/
+.venv/
