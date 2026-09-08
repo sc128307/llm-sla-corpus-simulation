@@ -19,9 +19,10 @@ sys.stdout.reconfigure(encoding="utf-8")
 import pandas as pd
 from src.metrics import LinguisticAuditor
 from src.data_loader import load_human_baseline
+from src.paths import GENERATED_DIR, FEATURE_DIR, generated_path
 
-OUT = "data/raw/LLM_Generations"
-RES = "data/results"
+OUT = str(GENERATED_DIR)
+RES = str(FEATURE_DIR)
 MODELS = ["Gemini-2.5-Flash", "Qwen-3.7-Plus", "DeepSeek-V4-Flash",
           "Llama-4-Maverick", "MiniMax-M3", "GPT-5.6-Luna"]
 CONDS = ["zero_shot", "one_shot", "few_shot", "cot"]
@@ -100,7 +101,11 @@ def process_corpus_file(aud, path, model, condition, done, shard_path,
 
 def main():
     which = sys.argv[1]  # "A" or "B"
-    aud = LinguisticAuditor()
+    # The CEFR lexicon is an external, user-supplied resource rather than a
+    # corpus artifact. Set CEFR_VOCAB_DIR to the directory containing
+    # cefr_full_vocab.csv before running feature extraction.
+    vocab_dir = os.getenv("CEFR_VOCAB_DIR")
+    aud = LinguisticAuditor(vocab_dir=vocab_dir) if vocab_dir else LinguisticAuditor()
     print(f"engine: {aud.grammar_engine}", flush=True)
 
     shard_path = os.path.join(RES, f"features_{which}.parquet")
@@ -139,7 +144,7 @@ def main():
     files = [(m, c) for m in MODELS for c in CONDS]
     my_files = files[0::2] if which == "A" else files[1::2]
     for m, c in my_files:
-        path = os.path.join(OUT, f"Corpus_{m}_{c}.csv")
+        path = str(generated_path(m, c))
         if not os.path.exists(path):
             print(f"[{which}] MISSING {path}", flush=True)
             continue

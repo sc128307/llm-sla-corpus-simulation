@@ -6,16 +6,18 @@ os.chdir(ROOT)
 sys.stdout.reconfigure(encoding="utf-8")
 
 import pandas as pd
+from src.paths import FEATURE_DIR
 
-A = pd.read_parquet("data/results/features_A.parquet")
-B = pd.read_parquet("data/results/features_B.parquet")
+A = pd.read_parquet(FEATURE_DIR / "features_A.parquet")
+B = pd.read_parquet(FEATURE_DIR / "features_B.parquet")
 print(f"A: {len(A)} rows | B: {len(B)} rows")
 assert len(A) == 72800, f"A expected 72800, got {len(A)}"
 assert len(B) == 67200, f"B expected 67200, got {len(B)}"
 
 df = pd.concat([A, B], ignore_index=True)
-df.to_parquet("data/results/features_all.parquet", index=False)
-print(f"\nMERGED: {len(df)} rows -> data/results/features_all.parquet")
+out = FEATURE_DIR / "features_all.parquet"
+df.to_parquet(out, index=False)
+print(f"\nMERGED: {len(df)} rows -> {out}")
 
 # validation
 print("\n=== coverage by model x condition ===")

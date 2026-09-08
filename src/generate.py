@@ -1,34 +1,30 @@
 """Phase 3 — condition-parameterised corpus generation (6 models x 4 conditions).
 
-Roster + routing (docs/MODEL_MATRIX.md, confirmed 2026-08-22):
-
-| Model             | Provider  | Lane     | Batch action support |
-|-------------------|-----------|----------|----------------------|
-| gpt-5.4           | openai    | batch    | submit / retrieve    |
-| qwen-plus         | aliyun    | batch    | submit / retrieve    |
-| deepseek-v4-flash | openrouter| realtime | n/a                  |
-| gemini-3.7-flash  | openrouter| realtime | n/a                  |
-| llama-4-maverick  | openrouter| realtime | n/a                  |
-| grok-4.3          | openrouter| realtime | n/a                  |
+Roster and routing are defined in ``configs/models.yaml``. The frozen run uses
+the six configured model IDs
+(GPT-5.6-Luna, Gemini-2.5-Flash, Qwen-3.7-Plus, DeepSeek-V4-Flash,
+Llama-4-Maverick, and MiniMax-M3).
 
 Batch lane (OpenAI-compatible /v1/batches, used by OpenAI official and
 DashScope compatible-mode):
   python -m src.generate --batch-action submit    # build JSONL + submit, save job ids
   python -m src.generate --batch-action retrieve  # poll jobs, download, convert to CSV
-Realtime lane (OpenRouter):
-  python -m src.generate --models x-ai/grok-4.3 --conditions zero_shot --limit 2
-  python -m src.generate                            # realtime models only
+The command-line lane is selected from the model configuration; do not infer
+provider or model identity from this module's historical examples.
 
-Design invariants (see data/README.md + docs/ENGINEERING_PLAN.md Phase 3):
+Design invariants (also summarised in the release README):
   - Canonical baseline via src.data_loader.load_human_baseline()
     (5,600 rows; pairing key = (id, topic)).
   - Exemplars (one/few-shot) fixed per (region, topic) cell, drawn ONLY from
-    data/interim/exemplar_pool.csv (never the L1-probe test split).
-  - temperature 0.7, max_tokens 600, reasoning disabled (api_extra).
-  - Output: data/raw/LLM_Generations/Corpus_<Model>_<Condition>.csv with
+    corpus/manifest/exemplar_pool.csv (never the L1-probe test split).
+  - temperature 0.7, max_tokens 2000, provider-specific reasoning/thinking
+    channels disabled (see configs/models.yaml).  This disables hidden
+    reasoning telemetry; it is not a request to expose chain-of-thought.
+  - Output: corpus/generated/Corpus_<Model>_<Condition>.csv with
     columns source_id, region, topic, proficiency, generated_text, model_id,
     condition, latency_s, prompt_tokens, completion_tokens.
-  - Per-row usage recorded; manifest with per-model counts + est. cost.
+  - Per-row usage is recorded in each generated CSV. A final run manifest must
+    be created separately before reporting costs or provenance.
 """
 import argparse
 import os
@@ -55,16 +51,18 @@ from dotenv import load_dotenv
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src.data_loader import load_human_baseline  # noqa: E402
+from src.paths import (EXEMPLAR_POOL_PATH, GENERATED_DIR, RESULTS_DIR,
+                       generated_path)  # noqa: E402
 
 load_dotenv(override=True)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 MODELS_PATH = BASE_DIR / "configs" / "models.yaml"
 PROMPTS_PATH = BASE_DIR / "configs" / "prompts.yaml"
-POOL_PATH = BASE_DIR / "data" / "interim" / "exemplar_pool.csv"
-OUT_DIR = BASE_DIR / "data" / "raw" / "LLM_Generations"
-BATCH_DIR = BASE_DIR / "data" / "outputs" / "batch_jobs"
-MANIFEST_PATH = BASE_DIR / "data" / "outputs" / "generation_manifest.csv"
+POOL_PATH = EXEMPLAR_POOL_PATH
+OUT_DIR = GENERATED_DIR
+BATCH_DIR = RESULTS_DIR / "batch_jobs"
+MANIFEST_PATH = RESULTS_DIR / "generation_manifest.csv"
 
 # OpenAI-compatible endpoints per provider
 PROVIDERS = {
@@ -98,12 +96,10 @@ PRICING = {
 }
 
 TEMPERATURE = 0.7
-# 2000 (not 600): DeepSeek-V4-Flash is a reasoning model — with 600, its
-# reasoning tokens exhaust the budget and content comes back empty
-# (verified 2026-08-22: 0 chars at 600 vs ~1600 chars at 1500). Essays are
-# 200-300 words (~350-400 tokens), so non-reasoning models never use the
-# extra headroom; the setting stays uniform across models (method section:
-# temperature 0.7, max_tokens 2000).
+# A uniform 2,000-token completion cap is used for all six configured models.
+# Provider-side reasoning/thinking is disabled in configs/models.yaml; retries
+# therefore handle empty or malformed responses as ordinary API failures rather
+# than assuming that tokens were consumed by an undisclosed reasoning trace.
 MAX_TOKENS = 2000
 MAX_RETRIES = 4
 BATCH_POLL_SEC = 60

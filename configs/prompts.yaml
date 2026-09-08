@@ -1,16 +1,16 @@
 # ==========================================================
 # 实验提示词配置 (CSH Rewrite - Prompt-Intervention Conditions)
 #
-# 自变量：提示干预程度
+# 实验因素：四个类别型提示条件（不作连续“干预剂量”解释）
 #   C0 zero_shot  — 极简 persona 注入（原有基线，保持不变）
 #   C1 one_shot   — + 1 篇真实学习者范文 (exemplar)
 #   C2 few_shot   — + k 篇真实学习者范文 (exemplars)
-#   C3 cot        — + 显式「先推理再写作」指令
+#   C3 cot        — + 显式学习者特征规划指令（仅提示层；不输出推理）
 #
 # 变量契约（所有条件共用，保证干预程度是唯一自变量）：
 #   {identity_block}    身份块（identity_definitions.Learner/Native，已格式化国家名）
 #   {topic}             作文题目 ("Part-time Job" / "Smoking Ban")
-#   {region}            地区代码 (CHN, THA, ...)，CoT 推理指令用
+#   {region}            地区代码 (CHN, THA, ...)，规划指令用
 #   {region_name}       地区全称（persona_mapping），exemplar 标签用
 #   {exemplar_source_desc}  "whose English is their second language"（学习者）
 #                       或 "a native English speaker"（ENS）——修复 2026-08-28
@@ -133,7 +133,10 @@ conditions:
       Write your essay now (approx. 200-300 words):
 
   cot:
-    description: "C3 — 基线 + 显式「先推理学习者特征，再写作」指令（输出不含推理）"
+    description: "C3 — 基线 + 显式学习者特征规划指令（仅输出作文，不输出推理）"
+    # Historical key `cot` is retained for data compatibility. This is a
+    # prompt-level planning instruction; provider-side reasoning/thinking is
+    # disabled separately in configs/models.yaml.
     system: >
       {identity_block}
       

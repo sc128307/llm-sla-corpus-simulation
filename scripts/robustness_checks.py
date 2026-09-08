@@ -16,14 +16,15 @@ sys.stdout.reconfigure(encoding="utf-8")
 import numpy as np
 import pandas as pd
 from pathlib import Path
+from src.paths import FEATURES_PATH, RESULTS_DIR, SPLIT_MANIFEST_PATH
 
-RES = "data/results"
+RES = str(RESULTS_DIR)
 
-df = pd.read_parquet(os.path.join(RES, "features_all_with_neosca.parquet"))
+df = pd.read_parquet(FEATURES_PATH)
 human = df[df["model"] == "HUMAN"]
 
 # test split keys
-sm = pd.read_csv("data/interim/split_manifest.csv")
+sm = pd.read_csv(SPLIT_MANIFEST_PATH)
 test_keys = set(sm.loc[sm["split"] == "test"].apply(
     lambda r: f"{r['id']}|{r['topic']}", axis=1))
 print(f"test-split keys: {len(test_keys)}")

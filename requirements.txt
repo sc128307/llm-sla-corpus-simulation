@@ -13,6 +13,7 @@ textstat
 
 # Feature extraction / L1 classification
 transformers
+sentencepiece
 torch
 scikit-learn
 pyarrow
@@ -29,7 +30,7 @@ huggingface_hub
 #   python -m spacy download en_core_web_sm
 #   (override with SPACY_MODEL env var, e.g. en_core_web_trf for higher accuracy)
 
-# neosca (constituency parser for MLT / clause-per-sentence):
-#   git+https://github.com/tanloong/neosca  (see docs; requires stanza models)
-# stanza models: download en_combine (tokenize,pos,constituency) to
-#   data/outputs/stanza_resources/ and set STANZA_MODEL_DIR in libs/neosca/ns_consts.py
+# NeoSCA (constituency parser for MLT / clause-per-sentence) and its Stanza
+# resources are optional and must be installed separately under the user's
+# local environment. See the workflow scripts and README for the required
+# input/output locations; no parser model is redistributed here.

@@ -9,8 +9,9 @@ os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.stdout.reconfigure(encoding="utf-8")
 
 import pandas as pd
+from src.paths import FEATURE_DIR, RESULTS_DIR
 
-RES = "data/results"
+RES = str(RESULTS_DIR)
 ALL = 140000
 
 # 1. collect all neosca CSVs
@@ -35,7 +36,7 @@ raw = raw.drop_duplicates(subset="dk", keep="last").drop(columns="dk")
 print(f"after dedup: {len(raw)} (removed {before - len(raw)} dup)")
 
 # 3. coverage check vs features_all keys
-feat = pd.read_parquet(os.path.join(RES, "features_all.parquet"),
+feat = pd.read_parquet(FEATURE_DIR / "features_all.parquet",
                        columns=["key", "model", "condition"])
 feat["dk"] = feat["key"] + "|" + feat["model"] + "|" + feat["condition"]
 raw["dk"] = raw["key"] + "|" + raw["model"] + "|" + raw["condition"]
@@ -56,7 +57,7 @@ raw.to_csv(out, index=False, encoding="utf-8")
 print(f"\nsaved -> {out} ({len(raw)} rows)")
 
 # 5. merge into features_all.parquet (keep ALL original columns)
-feat = pd.read_parquet(os.path.join(RES, "features_all.parquet"))
+feat = pd.read_parquet(FEATURE_DIR / "features_all.parquet")
 neosca_cols = raw[["key", "model", "condition", "MLT",
                    "Clause_per_Sentence"]].rename(
     columns={"key": "k2", "model": "m2", "condition": "c2"})
@@ -67,6 +68,6 @@ feat2.drop(columns=["k2", "m2", "c2"], inplace=True)
 print(f"\nmerged features_all: {len(feat2)} rows x {len(feat2.columns)} cols")
 print(f"MLT coverage: {feat2['MLT'].notna().sum()} / {len(feat2)}")
 print(f"C/S coverage: {feat2['Clause_per_Sentence'].notna().sum()} / {len(feat2)}")
-feat2.to_parquet(os.path.join(RES, "features_all_with_neosca.parquet"),
+feat2.to_parquet(FEATURE_DIR / "features_all_with_neosca.parquet",
                  index=False)
 print("saved -> features_all_with_neosca.parquet")
