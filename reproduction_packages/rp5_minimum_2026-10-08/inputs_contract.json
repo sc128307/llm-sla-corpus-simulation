@@ -1,0 +1,483 @@
+{
+  "schema_version": 1,
+  "status": "conditional_reproduction_materials",
+  "unit": "RP5",
+  "external_inputs": [
+    {
+      "path": "corpus/human/human_data_full.csv",
+      "sha256": "86D402EA96BBBD58E4F702DA7863602AA07A95E67B1CEA2AB43A86CDB8F37F9D",
+      "stages": [
+        "features",
+        "classifiers",
+        "writer"
+      ],
+      "included": false,
+      "description": "Canonical licensed human baseline: 5600 essays / 2800 writers; HKG=200."
+    },
+    {
+      "path": "corpus/manifest/split_manifest.csv",
+      "sha256": "4FA5FEFFD18784EF086AFA6143B5DC9DF67D7D2686995F34C3ACADBD263A4DDB",
+      "stages": [
+        "classifiers"
+      ],
+      "included": false,
+      "description": "Fixed writer-disjoint split; Primary excludes ENS test essays."
+    },
+    {
+      "path": "corpus/generated/Corpus_GPT-5.6-Luna_zero_shot.csv",
+      "sha256": "4E7684A58E7FD8DC63237A9A5D1BF6BFA1EC5887EFED1FDA9A6719D6C817375F",
+      "stages": [
+        "features",
+        "classifiers"
+      ],
+      "included": false,
+      "description": "Existing synthetic corpus: 5600 aligned keys; not regenerated."
+    },
+    {
+      "path": "corpus/generated/Corpus_GPT-5.6-Luna_one_shot.csv",
+      "sha256": "DBB1944AFE21A2770B54238EA47E3B6E3CB0C0F2AD1F13385C8442D8EC0E9E12",
+      "stages": [
+        "features",
+        "classifiers"
+      ],
+      "included": false,
+      "description": "Existing synthetic corpus: 5600 aligned keys; not regenerated."
+    },
+    {
+      "path": "corpus/generated/Corpus_GPT-5.6-Luna_few_shot.csv",
+      "sha256": "C42241F7206F827AB6CD2A6496FEB92120B9AA67DA1DAA889C75FDD586066586",
+      "stages": [
+        "features",
+        "classifiers"
+      ],
+      "included": false,
+      "description": "Existing synthetic corpus: 5600 aligned keys; not regenerated."
+    },
+    {
+      "path": "corpus/generated/Corpus_GPT-5.6-Luna_cot.csv",
+      "sha256": "3E19D86A493250FC7B01C5F4315C99C1173BA9845D4997336B8EF0CFEA4C50BF",
+      "stages": [
+        "features",
+        "classifiers"
+      ],
+      "included": false,
+      "description": "Existing synthetic corpus: 5600 aligned keys; not regenerated."
+    },
+    {
+      "path": "corpus/generated/Corpus_Gemini-2.5-Flash_zero_shot.csv",
+      "sha256": "8A0D95DE3A1F908E2620D43D1A8A0AE7C93C0FE65BAC99531E5F9105BE27B61E",
+      "stages": [
+        "features",
+        "classifiers"
+      ],
+      "included": false,
+      "description": "Existing synthetic corpus: 5600 aligned keys; not regenerated."
+    },
+    {
+      "path": "corpus/generated/Corpus_Gemini-2.5-Flash_one_shot.csv",
+      "sha256": "75A4F484FE7C4941D8691FC125E1F14B5EE5E8926BF4A88897175ABF89FBE67D",
+      "stages": [
+        "features",
+        "classifiers"
+      ],
+      "included": false,
+      "description": "Existing synthetic corpus: 5600 aligned keys; not regenerated."
+    },
+    {
+      "path": "corpus/generated/Corpus_Gemini-2.5-Flash_few_shot.csv",
+      "sha256": "1015D7CAFCDC86E61A09A1A8273E5218EE62C63ACFFA481B8D940F99D6CF512C",
+      "stages": [
+        "features",
+        "classifiers"
+      ],
+      "included": false,
+      "description": "Existing synthetic corpus: 5600 aligned keys; not regenerated."
+    },
+    {
+      "path": "corpus/generated/Corpus_Gemini-2.5-Flash_cot.csv",
+      "sha256": "F17D7B5E86184C69B2889EC23A781B7F50281399E4C469328B3DFA6D69089AE5",
+      "stages": [
+        "features",
+        "classifiers"
+      ],
+      "included": false,
+      "description": "Existing synthetic corpus: 5600 aligned keys; not regenerated."
+    },
+    {
+      "path": "corpus/generated/Corpus_DeepSeek-V4-Flash_zero_shot.csv",
+      "sha256": "EA87155DDE4092EE4CF1C29BCFD89C7342F84FAED179DE41AEE10D5090010836",
+      "stages": [
+        "features",
+        "classifiers"
+      ],
+      "included": false,
+      "description": "Existing synthetic corpus: 5600 aligned keys; not regenerated."
+    },
+    {
+      "path": "corpus/generated/Corpus_DeepSeek-V4-Flash_one_shot.csv",
+      "sha256": "F362B8B26B51E06956B418AF67C2CF636AEBB18B2813B63EE3622D2E40FD02E0",
+      "stages": [
+        "features",
+        "classifiers"
+      ],
+      "included": false,
+      "description": "Existing synthetic corpus: 5600 aligned keys; not regenerated."
+    },
+    {
+      "path": "corpus/generated/Corpus_DeepSeek-V4-Flash_few_shot.csv",
+      "sha256": "5DE5054E2F033CA6BE5E00A1D7B587A1973229E7E4C8060FF18441EACF6356E4",
+      "stages": [
+        "features",
+        "classifiers"
+      ],
+      "included": false,
+      "description": "Existing synthetic corpus: 5600 aligned keys; not regenerated."
+    },
+    {
+      "path": "corpus/generated/Corpus_DeepSeek-V4-Flash_cot.csv",
+      "sha256": "501057B832CAE6ED6AA5A573B4537BF0DB3CF169599B8D941DEAD5AE548B627E",
+      "stages": [
+        "features",
+        "classifiers"
+      ],
+      "included": false,
+      "description": "Existing synthetic corpus: 5600 aligned keys; not regenerated."
+    },
+    {
+      "path": "corpus/generated/Corpus_Qwen-3.7-Plus_zero_shot.csv",
+      "sha256": "196B266CECB338A28A840A1CDC3E8D5B973B235E96F215B57B31F25997DB35D1",
+      "stages": [
+        "features",
+        "classifiers"
+      ],
+      "included": false,
+      "description": "Existing synthetic corpus: 5600 aligned keys; not regenerated."
+    },
+    {
+      "path": "corpus/generated/Corpus_Qwen-3.7-Plus_one_shot.csv",
+      "sha256": "BF508F5AAAA94DAAD1425110BCAC165EDB6AD5EC70BD665C51B40776A0A59E32",
+      "stages": [
+        "features",
+        "classifiers"
+      ],
+      "included": false,
+      "description": "Existing synthetic corpus: 5600 aligned keys; not regenerated."
+    },
+    {
+      "path": "corpus/generated/Corpus_Qwen-3.7-Plus_few_shot.csv",
+      "sha256": "E51B21F617ED4F007A8782A9E6110EA7F6612A4B12B42A9B9515B37E6FAF9B41",
+      "stages": [
+        "features",
+        "classifiers"
+      ],
+      "included": false,
+      "description": "Existing synthetic corpus: 5600 aligned keys; not regenerated."
+    },
+    {
+      "path": "corpus/generated/Corpus_Qwen-3.7-Plus_cot.csv",
+      "sha256": "F97ADC3F0D13BFBC1673ADE7FC311791A3C37BAF2F52BF893FB9C19EEB06F092",
+      "stages": [
+        "features",
+        "classifiers"
+      ],
+      "included": false,
+      "description": "Existing synthetic corpus: 5600 aligned keys; not regenerated."
+    },
+    {
+      "path": "corpus/generated/Corpus_Llama-4-Maverick_zero_shot.csv",
+      "sha256": "403286BD69448C0F4498FFEB256A9FE42177587C7617C08BBCEDBF825D096027",
+      "stages": [
+        "features",
+        "classifiers"
+      ],
+      "included": false,
+      "description": "Existing synthetic corpus: 5600 aligned keys; not regenerated."
+    },
+    {
+      "path": "corpus/generated/Corpus_Llama-4-Maverick_one_shot.csv",
+      "sha256": "90768797BF91C296C4E115A561BF41A1A6B5F9840D4FDD3095C29D6A34F43E20",
+      "stages": [
+        "features",
+        "classifiers"
+      ],
+      "included": false,
+      "description": "Existing synthetic corpus: 5600 aligned keys; not regenerated."
+    },
+    {
+      "path": "corpus/generated/Corpus_Llama-4-Maverick_few_shot.csv",
+      "sha256": "85906A1AB5FB6AB4BAB5902E61E4896B539980E394A17C4F9F7E0C18FC02027C",
+      "stages": [
+        "features",
+        "classifiers"
+      ],
+      "included": false,
+      "description": "Existing synthetic corpus: 5600 aligned keys; not regenerated."
+    },
+    {
+      "path": "corpus/generated/Corpus_Llama-4-Maverick_cot.csv",
+      "sha256": "B22596FA7390236478C6EA725CBDE54DECA27F4A9B3C2DAEB490AD8162B2F970",
+      "stages": [
+        "features",
+        "classifiers"
+      ],
+      "included": false,
+      "description": "Existing synthetic corpus: 5600 aligned keys; not regenerated."
+    },
+    {
+      "path": "corpus/generated/Corpus_MiniMax-M3_zero_shot.csv",
+      "sha256": "73EA763AD320D68305EF62B1A2712C8475FD88ABDCF07C39187E8D6D6A2BCCDC",
+      "stages": [
+        "features",
+        "classifiers"
+      ],
+      "included": false,
+      "description": "Existing synthetic corpus: 5600 aligned keys; not regenerated."
+    },
+    {
+      "path": "corpus/generated/Corpus_MiniMax-M3_one_shot.csv",
+      "sha256": "C98642523EEE66A6E2D69CDEE29ECED3496FBB299CD116E58085A2E418C1EFBC",
+      "stages": [
+        "features",
+        "classifiers"
+      ],
+      "included": false,
+      "description": "Existing synthetic corpus: 5600 aligned keys; not regenerated."
+    },
+    {
+      "path": "corpus/generated/Corpus_MiniMax-M3_few_shot.csv",
+      "sha256": "E721AEDFB644146E41C824BCFAFA468A1598B1BBCC1315EA50CA1773B55B69F7",
+      "stages": [
+        "features",
+        "classifiers"
+      ],
+      "included": false,
+      "description": "Existing synthetic corpus: 5600 aligned keys; not regenerated."
+    },
+    {
+      "path": "corpus/generated/Corpus_MiniMax-M3_cot.csv",
+      "sha256": "41E9EE93AD19B17513EC6BF90385903D2C2B906BEC06122981D7764FB924FF58",
+      "stages": [
+        "features",
+        "classifiers"
+      ],
+      "included": false,
+      "description": "Existing synthetic corpus: 5600 aligned keys; not regenerated."
+    },
+    {
+      "path": "features/features_all_with_neosca.parquet",
+      "sha256": "0120E011BAE2BCBB8CA59CE99C701DC8187FBD772DF59C28DFA77BBBEBC6AFFA",
+      "stages": [
+        "intrinsic",
+        "writer"
+      ],
+      "included": false,
+      "description": "Frozen 140000-row, 29-column feature matrix with 22 analysis features."
+    },
+    {
+      "path": "results/bootstrap_summary.csv",
+      "sha256": "29B4BE946F9FB50540D7497539330FAE4AB80C4802D1AE7CA6B6C43AC1B1B621",
+      "stages": [
+        "writer"
+      ],
+      "included": false,
+      "description": "Exact original writer-bootstrap dependency; obtain separately."
+    },
+    {
+      "path": "results/l1_dataset/oracle_human.parquet",
+      "sha256": "576EB4E9BB948BC952A2B9D9D724D63AE19AFB035008A26CBADB99293FF45149",
+      "stages": [
+        "writer"
+      ],
+      "included": false,
+      "description": "Exact original writer-bootstrap dependency; obtain separately."
+    },
+    {
+      "path": "notebook/cefr_full_vocab.csv",
+      "sha256": "E6893A952E8B159536B969B8980580E4C031931A7AC935DD887BB578C5C791C7",
+      "stages": [
+        "features"
+      ],
+      "included": false,
+      "description": "CEFR lexicon, separately licensed."
+    },
+    {
+      "path": "models/grammar_cola/grammar_cola/config.json",
+      "sha256": "B340F30D4BF5A90ABF8B2630F6B89E984BF615DFD2C80F4EEEAC1549F0F01F27",
+      "stages": [
+        "features"
+      ],
+      "included": false,
+      "description": "Project fine-tuned RoBERTa-CoLA resource; no weight contents supplied."
+    },
+    {
+      "path": "models/grammar_cola/grammar_cola/metadata.json",
+      "sha256": "A65E99332BF3BD781195B118D30E9AD509E3A6BE2EE5DCB9CB75B02569922D25",
+      "stages": [
+        "features"
+      ],
+      "included": false,
+      "description": "Project fine-tuned RoBERTa-CoLA resource; no weight contents supplied."
+    },
+    {
+      "path": "models/grammar_cola/grammar_cola/model.safetensors",
+      "sha256": "3B85AF8D900BC0CB3B1A8576E3FE33F250C9E0D46B48496FCD4B3C6FB2CDA028",
+      "stages": [
+        "features"
+      ],
+      "included": false,
+      "description": "Project fine-tuned RoBERTa-CoLA resource; no weight contents supplied."
+    },
+    {
+      "path": "models/grammar_cola/grammar_cola/merges.txt",
+      "sha256": "1CE1664773C50F3E0CC8842619A93EDC4624525B728B188A9E0BE33B7726ADC5",
+      "stages": [
+        "features"
+      ],
+      "included": false,
+      "description": "Project fine-tuned RoBERTa-CoLA resource; no weight contents supplied."
+    },
+    {
+      "path": "models/grammar_cola/grammar_cola/vocab.json",
+      "sha256": "ED19656EA1707DF69134C4AF35C8CEDA2CC9860BF2C3495026153A133670AB5E",
+      "stages": [
+        "features"
+      ],
+      "included": false,
+      "description": "Project fine-tuned RoBERTa-CoLA resource; no weight contents supplied."
+    },
+    {
+      "path": "models/grammar_cola/grammar_cola/tokenizer.json",
+      "sha256": "350BA8DB06D0DF480135C681DC060877BDB3021947BD1932FC2E39B3E2A02B28",
+      "stages": [
+        "features"
+      ],
+      "included": false,
+      "description": "Project fine-tuned RoBERTa-CoLA resource; no weight contents supplied."
+    },
+    {
+      "path": "models/grammar_cola/grammar_cola/tokenizer_config.json",
+      "sha256": "253E231E9AE9FD6E64762375B14C8F7F266C711B75D2B74A17170E6F3DEFE729",
+      "stages": [
+        "features"
+      ],
+      "included": false,
+      "description": "Project fine-tuned RoBERTa-CoLA resource; no weight contents supplied."
+    },
+    {
+      "path": "models/grammar_cola/grammar_cola/special_tokens_map.json",
+      "sha256": "8574792BFEFAE68F2CE2EAE93A4145D95B1232C59E71094BCDCB49DBCB549C97",
+      "stages": [
+        "features"
+      ],
+      "included": false,
+      "description": "Project fine-tuned RoBERTa-CoLA resource; no weight contents supplied."
+    },
+    {
+      "path": "models/deberta-v3-base/deberta-v3-base/config.json",
+      "sha256": "649F6A1EC33C6BDD9A6486D5C66019D461139E54957073EAFE9BBC2D34C75B0B",
+      "stages": [
+        "classifiers"
+      ],
+      "included": false,
+      "description": "Local microsoft/deberta-v3-base resource; obtain under its own terms."
+    },
+    {
+      "path": "models/deberta-v3-base/deberta-v3-base/pytorch_model.bin",
+      "sha256": "691D48A2800B926A19E3051DEF466FC2CCA4F59A15E42CE4A0CF7F1B380B5E33",
+      "stages": [
+        "classifiers"
+      ],
+      "included": false,
+      "description": "Local microsoft/deberta-v3-base resource; obtain under its own terms."
+    },
+    {
+      "path": "models/deberta-v3-base/deberta-v3-base/spm.model",
+      "sha256": "C679FBF93643D19AAB7EE10C0B99E460BDBC02FEDF34B92B05AF343B4AF586FD",
+      "stages": [
+        "classifiers"
+      ],
+      "included": false,
+      "description": "Local microsoft/deberta-v3-base resource; obtain under its own terms."
+    },
+    {
+      "path": "models/deberta-v3-base/deberta-v3-base/tokenizer_config.json",
+      "sha256": "3F3978E0C036F2C2588CAC34A6047CBB0AF0B0DC1814254E291028529805496D",
+      "stages": [
+        "classifiers"
+      ],
+      "included": false,
+      "description": "Local microsoft/deberta-v3-base resource; obtain under its own terms."
+    }
+  ],
+  "primary": {
+    "classes": 10,
+    "human_test_essays": 1040,
+    "human_test_writers": 520,
+    "train_dev_writer_split": "85/15",
+    "classifiers": 37,
+    "features": 22,
+    "intrinsic_keys": 2000,
+    "strata": 20,
+    "keys_per_stratum": 100,
+    "seed": 42
+  },
+  "writer_sensitivity": {
+    "seed": 20261006,
+    "reps": 10000,
+    "sampling_unit": "writer within region",
+    "estimator": "equal-weight mean of 20 region-topic stratum means",
+    "invalid_reps": 0
+  },
+  "writer_selection": {
+    "seed": 42,
+    "keys": 2000,
+    "strata": 20,
+    "keys_per_stratum": 100,
+    "writers": 1534,
+    "writers_with_two_selected_essays": 466
+  },
+  "bridge": {
+    "cells": 24,
+    "formula": "outcome ~ mean_abs_d_z + C(model) + C(condition)",
+    "within_model_permutations": 10000,
+    "model_block_bootstraps": 5000,
+    "seed": 42,
+    "interpretation": "exploratory/non-causal"
+  },
+  "feature_engine_evidence": {
+    "grammar_engine": "roberta-cola",
+    "grammar_base_model": "roberta-base",
+    "grammar_cola_mcc": 0.6339,
+    "spacy_version": "3.8.7 (environment cross-check; original feature-run log unavailable)",
+    "spacy_model": "en_core_web_sm 3.8.0",
+    "neosca_version": "0.1.4 (environment cross-check; original feature-run log unavailable)",
+    "stanza_version": "1.14.0 (environment cross-check; original feature-run log unavailable)",
+    "neosca_length_rule": "text[:3000]; length audit found zero actual truncations",
+    "feature_provenance_status": "cross-checked from environment, extraction script, model metadata, and feature-value audit; original run log unavailable"
+  },
+  "qa_environment_versions": {
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "scipy": "1.15.2",
+    "statsmodels": "0.14.5",
+    "pyarrow": "22.0.0",
+    "torch": "2.9.0+cu126",
+    "transformers": "4.57.1",
+    "scikit-learn": "1.7.2",
+    "accelerate": "1.11.0",
+    "spacy": "3.8.7"
+  },
+  "qa_environment_basis": "Observed on package-QA day; not a historical experiment lock.",
+  "additional_resources": [
+    "en_core_web_sm 3.8.0",
+    "NeoSCA 0.1.4 and configured Stanza 1.14.0 parser models; original vendor/resource path configuration not bundled"
+  ],
+  "limitations": [
+    "Full experiment not rerun; excluded inputs must be obtained legitimately and matched.",
+    "Original feature-run logs and complete historical environment are unavailable.",
+    "Keyed fixed-test predictions are missing; seven accuracy and 17 macro-F1 cells remain unreconciled.",
+    "Historical p/q fields are provenance, not certified writer-aware inference.",
+    "Raw corpus parsing alone does not establish canonical input parity or undocumented cleaning.",
+    "Provider IDs/templates do not constitute immutable service snapshots."
+  ]
+}

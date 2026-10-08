@@ -1,0 +1,6 @@
+# Functional dependencies; not a reconstructed historical environment lock.
+numpy
+pandas
+scipy
+statsmodels
+pyarrow

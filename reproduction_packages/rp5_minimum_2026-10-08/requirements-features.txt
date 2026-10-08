@@ -1,0 +1,11 @@
+-r requirements-analysis.txt
+# Versions cross-checked locally; original feature-run log is unavailable.
+spacy==3.8.7
+textstat
+torch
+transformers
+sentencepiece
+scikit-learn
+accelerate
+requests
+# Obtain en_core_web_sm 3.8.0, lexicon and local weights separately.

@@ -1,0 +1,411 @@
+{
+  "schema_version": 1,
+  "scope": "Minimum experiment reproduction materials; owner-approved repository delivery; no manuscripts",
+  "publication_approved": true,
+  "files": [
+    {
+      "path": "configs/model_configuration.json",
+      "sha256": "AF9139A7659B04C41F79CA7098EB59B6CED6ABB388F4C25848066A1321C61E77",
+      "bytes": 1610,
+      "source_path": "original configuration export: model_configuration.json",
+      "source_sha256": "AF9139A7659B04C41F79CA7098EB59B6CED6ABB388F4C25848066A1321C61E77",
+      "rights_basis": "Original MIT software/configuration"
+    },
+    {
+      "path": "configs/prompt_configuration.json",
+      "sha256": "C6D147F58EFCF8A0AC0216009BE81B75F1D644A4898DF23BB95D3624579832DB",
+      "bytes": 3762,
+      "source_path": "original configuration export: prompt_configuration.json",
+      "source_sha256": "C6D147F58EFCF8A0AC0216009BE81B75F1D644A4898DF23BB95D3624579832DB",
+      "rights_basis": "Original MIT software/configuration"
+    },
+    {
+      "path": "inputs_contract.json",
+      "sha256": "48655AAC34C953347C489AAEEBBAF3B67F806AEFC14C8224336D885C55A44F8E",
+      "bytes": 16999
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "F61A4957DFADDFD43141386417AD7AC528C67F27BA1AA6CD78432A4E76122BBF",
+      "bytes": 1086,
+      "source_path": "LICENSE",
+      "source_sha256": "F61A4957DFADDFD43141386417AD7AC528C67F27BA1AA6CD78432A4E76122BBF",
+      "rights_basis": "Original MIT software/configuration"
+    },
+    {
+      "path": "README.md",
+      "sha256": "2E9730764CE6E79923DC3C4AF93C4E758CEDD7C5B2E15A8D5D45D84ECF1496A4",
+      "bytes": 7446
+    },
+    {
+      "path": "reference_results/bootstrap_summary.csv",
+      "sha256": "29B4BE946F9FB50540D7497539330FAE4AB80C4802D1AE7CA6B6C43AC1B1B621",
+      "bytes": 111778,
+      "source_path": "results/bootstrap_summary.csv",
+      "source_sha256": "29B4BE946F9FB50540D7497539330FAE4AB80C4802D1AE7CA6B6C43AC1B1B621",
+      "rights_basis": "Limited academic numerical reporting; no express aggregate sublicense",
+      "rows": 550,
+      "columns": [
+        "analysis_set",
+        "model",
+        "condition",
+        "feature",
+        "feature_family",
+        "mean",
+        "ci_low",
+        "ci_high",
+        "n_keys",
+        "n_strata",
+        "paired_delta",
+        "paired_delta_ci_low",
+        "paired_delta_ci_high",
+        "bootstrap_p",
+        "q_bh"
+      ]
+    },
+    {
+      "path": "reference_results/bridge_cells.csv",
+      "sha256": "8C3EB69070F6091709A371C6D7DBAD02B31B7FE5810286CD9218B3FC5D33AF9E",
+      "bytes": 2207,
+      "source_path": "results/bridge_feature_transfer.csv",
+      "source_sha256": "8C3EB69070F6091709A371C6D7DBAD02B31B7FE5810286CD9218B3FC5D33AF9E",
+      "rights_basis": "Limited academic numerical reporting; no express aggregate sublicense",
+      "rows": 24,
+      "columns": [
+        "model",
+        "condition",
+        "n_features",
+        "mean_abs_d_z",
+        "classifier",
+        "accuracy",
+        "macro_f1"
+      ]
+    },
+    {
+      "path": "reference_results/intrinsic_effect_sizes.csv",
+      "sha256": "3D2A2E6EE3F09FD0597C45D6C6548AC138B228095FEE661CCC18CA2B1AF57745",
+      "bytes": 50754,
+      "source_path": "results/effect_sizes.csv",
+      "source_sha256": "3D2A2E6EE3F09FD0597C45D6C6548AC138B228095FEE661CCC18CA2B1AF57745",
+      "rights_basis": "Limited academic numerical reporting; no express aggregate sublicense",
+      "rows": 528,
+      "columns": [
+        "analysis_set",
+        "model",
+        "condition",
+        "feature",
+        "feature_family",
+        "d_z",
+        "n_keys",
+        "effect_definition"
+      ]
+    },
+    {
+      "path": "reference_results/intrinsic_writer_sensitivity.csv",
+      "sha256": "CDE66FB028F8BC2E1FF8B3C4867BBCE9BC7897AA4D0888D1E4A19FA4413CDEF3",
+      "bytes": 175642,
+      "source_path": "results/rp2_writer_cluster_bootstrap_2026-10-06.csv",
+      "source_sha256": "CDE66FB028F8BC2E1FF8B3C4867BBCE9BC7897AA4D0888D1E4A19FA4413CDEF3",
+      "rights_basis": "Limited academic numerical reporting; no express aggregate sublicense",
+      "rows": 528,
+      "columns": [
+        "analysis_set",
+        "model",
+        "condition",
+        "feature",
+        "feature_family",
+        "paired_delta",
+        "writer_bootstrap_ci_low",
+        "writer_bootstrap_ci_high",
+        "essay_bootstrap_ci_low",
+        "essay_bootstrap_ci_high",
+        "n_keys",
+        "n_strata",
+        "n_writers",
+        "n_writers_with_two_selected_essays",
+        "n_bootstrap_reps",
+        "n_valid_reps",
+        "n_invalid_reps",
+        "bootstrap_method",
+        "sampling_unit",
+        "conditioning",
+        "selection_seed",
+        "bootstrap_seed"
+      ]
+    },
+    {
+      "path": "reference_results/jensen_shannon.csv",
+      "sha256": "A9A0966133A8AA7C383407B9A8B68C273F0649F5D837EE342E150E356DFE6C41",
+      "bytes": 51157,
+      "source_path": "results/jensen_shannon.csv",
+      "source_sha256": "A9A0966133A8AA7C383407B9A8B68C273F0649F5D837EE342E150E356DFE6C41",
+      "rights_basis": "Limited academic numerical reporting; no express aggregate sublicense",
+      "rows": 528,
+      "columns": [
+        "analysis_set",
+        "model",
+        "condition",
+        "feature",
+        "JSD",
+        "bin_rule"
+      ]
+    },
+    {
+      "path": "reference_results/jensen_shannon_region.csv",
+      "sha256": "B4AF2A8AA19B96DE80E5B5391DC9E83406370D09708118B4F53E9519957D3281",
+      "bytes": 573906,
+      "source_path": "results/jensen_shannon_region.csv",
+      "source_sha256": "B4AF2A8AA19B96DE80E5B5391DC9E83406370D09708118B4F53E9519957D3281",
+      "rights_basis": "Limited academic numerical reporting; no express aggregate sublicense",
+      "rows": 5280,
+      "columns": [
+        "analysis_set",
+        "model",
+        "condition",
+        "region",
+        "feature",
+        "JSD",
+        "n_human",
+        "n_generated",
+        "bin_rule"
+      ]
+    },
+    {
+      "path": "reference_results/marker_condition_summary.csv",
+      "sha256": "ACC0B717A99CB1781BD295247E33C2BD005C6625CFA91BF380A14B0C5B098E2A",
+      "bytes": 1717,
+      "source_path": "results/l1_primary_raw_vs_anonymized_condition_summary.csv",
+      "source_sha256": "ACC0B717A99CB1781BD295247E33C2BD005C6625CFA91BF380A14B0C5B098E2A",
+      "rights_basis": "Limited academic numerical reporting; no express aggregate sublicense",
+      "rows": 6,
+      "columns": [
+        "condition",
+        "n",
+        "raw_accuracy_mean",
+        "anonymized_accuracy_mean",
+        "accuracy_delta_mean",
+        "accuracy_delta_sd",
+        "accuracy_delta_min",
+        "accuracy_delta_max",
+        "raw_f1_mean",
+        "anonymized_f1_mean",
+        "f1_delta_mean",
+        "f1_delta_sd",
+        "f1_delta_min",
+        "f1_delta_max"
+      ]
+    },
+    {
+      "path": "reference_results/marker_paired_comparison.csv",
+      "sha256": "1CB8373D0156ECA4CF921FC977FB43A8799E47CA8516939DC6AE41A12F66BBFA",
+      "bytes": 6492,
+      "source_path": "results/l1_primary_raw_vs_anonymized.csv",
+      "source_sha256": "1CB8373D0156ECA4CF921FC977FB43A8799E47CA8516939DC6AE41A12F66BBFA",
+      "rights_basis": "Limited academic numerical reporting; no express aggregate sublicense",
+      "rows": 37,
+      "columns": [
+        "classifier",
+        "raw_accuracy",
+        "raw_f1",
+        "model",
+        "condition",
+        "anonymized_accuracy",
+        "anonymized_f1",
+        "accuracy_delta",
+        "f1_delta",
+        "accuracy_drop",
+        "f1_drop"
+      ]
+    },
+    {
+      "path": "reference_results/regional_marker_replaced_summary.csv",
+      "sha256": "D3890D1BE14DE391227A3D3AFEA674C9562C474DBB3457FBF6ADCB3CE50ACCDA",
+      "bytes": 1935,
+      "source_path": "results/l1_classification_summary_primary_anonymized.csv",
+      "source_sha256": "D3890D1BE14DE391227A3D3AFEA674C9562C474DBB3457FBF6ADCB3CE50ACCDA",
+      "rights_basis": "Limited academic numerical reporting; no express aggregate sublicense",
+      "rows": 37,
+      "columns": [
+        "classifier",
+        "accuracy",
+        "f1"
+      ]
+    },
+    {
+      "path": "reference_results/regional_raw_summary.csv",
+      "sha256": "AA8884AC8A25A247CF8BAE65D0A14C6B8F0B64DA27E47A9E72AD9AE8580A7BDE",
+      "bytes": 1909,
+      "source_path": "results/l1_classification_summary_primary.csv",
+      "source_sha256": "AA8884AC8A25A247CF8BAE65D0A14C6B8F0B64DA27E47A9E72AD9AE8580A7BDE",
+      "rights_basis": "Limited academic numerical reporting; no express aggregate sublicense",
+      "rows": 37,
+      "columns": [
+        "classifier",
+        "accuracy",
+        "f1"
+      ]
+    },
+    {
+      "path": "requirements-analysis.txt",
+      "sha256": "A547CD8E535116765F756D5C68DFDBB9E5F765B59C7BF15F9537AB37C7DCFF4F",
+      "bytes": 115
+    },
+    {
+      "path": "requirements-features.txt",
+      "sha256": "048907558FBF579BCD36A8840A8BAE3AB671F21022046936217ACD0C63205A55",
+      "bytes": 261
+    },
+    {
+      "path": "requirements-neosca.txt",
+      "sha256": "798C183DFEBD5D4B13FBCDE3E6BD0346193D3A2AD72C026B9330E852DB165C81",
+      "bytes": 135
+    },
+    {
+      "path": "RIGHTS_AND_ATTRIBUTION.md",
+      "sha256": "75ECBDA9AC672B56583D322FE36F77589ADEAEC954C2858A72F117AC817A07A3",
+      "bytes": 2269
+    },
+    {
+      "path": "scripts/audit_bridge_inputs.py",
+      "sha256": "55426CA80080683EFDF8F8E93F766092D572B8135F1A851452212B175BEF883E",
+      "bytes": 5758,
+      "source_path": "scripts/audit_bridge_inputs.py",
+      "source_sha256": "55426CA80080683EFDF8F8E93F766092D572B8135F1A851452212B175BEF883E",
+      "rights_basis": "Original MIT software/configuration"
+    },
+    {
+      "path": "scripts/audit_l1_region_markers.py",
+      "sha256": "58077FE7406224F76CDD05064CB1A0F7DD17A0F764D448B9D57F90107185DD6A",
+      "bytes": 4011,
+      "source_path": "scripts/audit_l1_region_markers.py",
+      "source_sha256": "58077FE7406224F76CDD05064CB1A0F7DD17A0F764D448B9D57F90107185DD6A",
+      "rights_basis": "Original MIT software/configuration"
+    },
+    {
+      "path": "scripts/build_l1_anonymized.py",
+      "sha256": "37ECAF8930E5AB2CF11E69BCF4DDB98CA61001FD9D9A9FDD9535CF2BF485641C",
+      "bytes": 1954,
+      "source_path": "scripts/build_l1_anonymized.py",
+      "source_sha256": "37ECAF8930E5AB2CF11E69BCF4DDB98CA61001FD9D9A9FDD9535CF2BF485641C",
+      "rights_basis": "Original MIT software/configuration"
+    },
+    {
+      "path": "scripts/build_l1_dataset.py",
+      "sha256": "B4978B732466CB062AA91E6DD303FEC4495A90BA6DAE559D525701C1049CFD73",
+      "bytes": 10913,
+      "source_path": "scripts/build_l1_dataset.py",
+      "source_sha256": "B4978B732466CB062AA91E6DD303FEC4495A90BA6DAE559D525701C1049CFD73",
+      "rights_basis": "Original MIT software/configuration"
+    },
+    {
+      "path": "scripts/compare_primary_anonymized.py",
+      "sha256": "A2154643600441105A7B05927D5BE110D4E7366E592F6F1900B5A4E0B92A2E87",
+      "bytes": 4931,
+      "source_path": "scripts/compare_primary_anonymized.py",
+      "source_sha256": "A2154643600441105A7B05927D5BE110D4E7366E592F6F1900B5A4E0B92A2E87",
+      "rights_basis": "Original MIT software/configuration"
+    },
+    {
+      "path": "scripts/extract_features_v2.py",
+      "sha256": "B735F52DA41105998E971135C3E68F4C486B68234D0A3FF474B6828878C0A54D",
+      "bytes": 5633,
+      "source_path": "scripts/extract_features_v2.py",
+      "source_sha256": "B735F52DA41105998E971135C3E68F4C486B68234D0A3FF474B6828878C0A54D",
+      "rights_basis": "Original MIT software/configuration"
+    },
+    {
+      "path": "scripts/extract_neosca_pandas.py",
+      "sha256": "F27E61309D42CD688F5B7A61B1B1D86E39E64688ABFA7C22F686828AA025AFE6",
+      "bytes": 5636,
+      "source_path": "scripts/extract_neosca_pandas.py",
+      "source_sha256": "F27E61309D42CD688F5B7A61B1B1D86E39E64688ABFA7C22F686828AA025AFE6",
+      "rights_basis": "Original MIT software/configuration"
+    },
+    {
+      "path": "scripts/merge_features.py",
+      "sha256": "123132F53720EFF44459B183318F05681F0FBA2022B92B5D58A5745F5747F9E0",
+      "bytes": 1309,
+      "source_path": "scripts/merge_features.py",
+      "source_sha256": "123132F53720EFF44459B183318F05681F0FBA2022B92B5D58A5745F5747F9E0",
+      "rights_basis": "Original MIT software/configuration"
+    },
+    {
+      "path": "scripts/merge_neosca.py",
+      "sha256": "BB0F429A090D1A29342D08153778EFAEF91ED21CC5286B7B14B505878ED1E2BD",
+      "bytes": 3135,
+      "source_path": "scripts/merge_neosca.py",
+      "source_sha256": "BB0F429A090D1A29342D08153778EFAEF91ED21CC5286B7B14B505878ED1E2BD",
+      "rights_basis": "Original MIT software/configuration"
+    },
+    {
+      "path": "scripts/phase4_statistics.py",
+      "sha256": "8164309C8FCFB56D1525483A8C331FC642188C2D4CB02F77715781F80C6DF33F",
+      "bytes": 11524,
+      "source_path": "scripts/phase4_statistics.py",
+      "source_sha256": "8164309C8FCFB56D1525483A8C331FC642188C2D4CB02F77715781F80C6DF33F",
+      "rights_basis": "Original MIT software/configuration"
+    },
+    {
+      "path": "scripts/run_bridge_analysis.py",
+      "sha256": "0108C9597230DA63AB854E8F32327DCB54282C54C468C4DCDE81620AEFDE6B82",
+      "bytes": 9472,
+      "source_path": "scripts/run_bridge_analysis.py",
+      "source_sha256": "0108C9597230DA63AB854E8F32327DCB54282C54C468C4DCDE81620AEFDE6B82",
+      "rights_basis": "Original MIT software/configuration"
+    },
+    {
+      "path": "scripts/run_rp2_writer_cluster_bootstrap.py",
+      "sha256": "1AB6FA88773DA3AB03E607FD628E2FC4C8410574A5D4B2C14F951E41FFF1F98B",
+      "bytes": 12488,
+      "source_path": "scripts/run_rp2_writer_cluster_bootstrap.py",
+      "source_sha256": "1AB6FA88773DA3AB03E607FD628E2FC4C8410574A5D4B2C14F951E41FFF1F98B",
+      "rights_basis": "Original MIT software/configuration"
+    },
+    {
+      "path": "scripts/train_l1_classifiers.py",
+      "sha256": "071EA1D298D6A29F6313450C81F8BDB89B46EC7F8FDD54A19EFDBA6526950B6E",
+      "bytes": 11372,
+      "source_path": "scripts/train_l1_classifiers.py",
+      "source_sha256": "071EA1D298D6A29F6313450C81F8BDB89B46EC7F8FDD54A19EFDBA6526950B6E",
+      "rights_basis": "Original MIT software/configuration"
+    },
+    {
+      "path": "src/__init__.py",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "bytes": 0,
+      "source_path": "src/__init__.py",
+      "source_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rights_basis": "Original MIT software/configuration"
+    },
+    {
+      "path": "src/data_loader.py",
+      "sha256": "9B3A60455CE76981FC897E7ADBC2A1C8F7A17FE4816F297C3A1527BEB976EB5A",
+      "bytes": 7659,
+      "source_path": "src/data_loader.py",
+      "source_sha256": "9B3A60455CE76981FC897E7ADBC2A1C8F7A17FE4816F297C3A1527BEB976EB5A",
+      "rights_basis": "Original MIT software/configuration"
+    },
+    {
+      "path": "src/metrics.py",
+      "sha256": "3E5EACD79558C0BE91D71483879DE5519D64AF6E18DF6AAF5100B538B9E53EAF",
+      "bytes": 27172,
+      "source_path": "src/metrics.py",
+      "source_sha256": "3E5EACD79558C0BE91D71483879DE5519D64AF6E18DF6AAF5100B538B9E53EAF",
+      "rights_basis": "Original MIT software/configuration"
+    },
+    {
+      "path": "src/paths.py",
+      "sha256": "85244FB9B7D5ACDF22329A388BF6649D6950F49046F20FC3EEED7AB1E103A208",
+      "bytes": 1146,
+      "source_path": "src/paths.py",
+      "source_sha256": "85244FB9B7D5ACDF22329A388BF6649D6950F49046F20FC3EEED7AB1E103A208",
+      "rights_basis": "Original MIT software/configuration"
+    },
+    {
+      "path": "verify_package.py",
+      "sha256": "794AD9BCF4C244496627137F52B44C4858ACCBC8DD18CA05365DD307B36B742C",
+      "bytes": 5631
+    }
+  ],
+  "inventory_self_hash": "Use the fixed commit/archive and independently hash this file; omitted here to avoid self-reference"
+}

@@ -1,0 +1,46 @@
+{
+  "identity_definitions": {
+    "Learner": "You are a university student from {country}. English is your second language (L2).\n",
+    "Native": "You are a university student from the United States. English is your native language (L1).\n"
+  },
+  "universal_prompt": {
+    "system": "{identity_block}\nTask: Write a short argumentative essay for a college assignment.\nCRITICAL:  - Act exactly as this student would in a real test situation. - Write directly. Do not include any introductory text or titles.\n",
+    "user": "Topic: \"{topic}\"\nWrite your essay now (approx. 200-300 words):\n"
+  },
+  "persona_mapping": {
+    "ENS": "the United States",
+    "CHN": "Mainland China",
+    "TWN": "Taiwan",
+    "HKG": "Hong Kong",
+    "JPN": "Japan",
+    "KOR": "South Korea",
+    "THA": "Thailand",
+    "IDN": "Indonesia",
+    "PAK": "Pakistan",
+    "SIN": "Singapore",
+    "PHL": "The Philippines"
+  },
+  "few_shot_k": 3,
+  "conditions": {
+    "zero_shot": {
+      "description": "C0 — 极简 persona 注入（基线，与旧 universal_prompt 逐字一致）",
+      "system": "{identity_block}\nTask: Write a short argumentative essay for a college assignment.\nCRITICAL:  - Act exactly as this student would in a real test situation. - Write directly. Do not include any introductory text or titles.\n",
+      "user": "Topic: \"{topic}\"\nWrite your essay now (approx. 200-300 words):\n"
+    },
+    "one_shot": {
+      "description": "C1 — 基线 + 1 篇真实学习者范文（同地区，仅作风格参照）",
+      "system": "{identity_block}\nTask: Write a short argumentative essay for a college assignment.\nCRITICAL:  - Act exactly as this student would in a real test situation. - Write directly. Do not include any introductory text or titles.\n",
+      "user": "Below is an essay written by a university student from {region_name} {exemplar_source_desc}. Use it ONLY as a reference for proficiency level, sentence structure, and typical errors — do not copy its content:\n--- exemplar essay (from {region_name}) --- {exemplar} --- end of exemplar ---\nTopic: \"{topic}\"\nWrite your essay now (approx. 200-300 words):\n"
+    },
+    "few_shot": {
+      "description": "C2 — 基线 + k 篇真实学习者范文（同地区；k = few_shot_k）",
+      "system": "{identity_block}\nTask: Write a short argumentative essay for a college assignment.\nCRITICAL:  - Act exactly as this student would in a real test situation. - Write directly. Do not include any introductory text or titles.\n",
+      "user": "Below are essays written by university students from {region_name} {exemplar_source_desc}. Use them ONLY as references for proficiency level, sentence structure, and typical errors — do not copy their content:\n--- exemplar essays (from {region_name}) --- {exemplars} --- end of exemplars ---\nTopic: \"{topic}\"\nWrite your essay now (approx. 200-300 words):\n"
+    },
+    "cot": {
+      "description": "C3 — 基线 + 显式学习者特征规划指令（仅输出作文，不输出推理）",
+      "system": "{identity_block}\nTask: Write a short argumentative essay for a college assignment.\nBefore writing, reason step by step about what this student's essay would realistically look like: their CEFR proficiency (A2–B2), the kinds of grammatical errors and L1-influenced patterns a {region} learner would produce, and the register of an exam essay. Use that reasoning to guide your writing.\nCRITICAL:  - Act exactly as this student would in a real test situation. - Write directly. Do not include your reasoning in the output. - Do not include any introductory text or titles.\n",
+      "user": "Topic: \"{topic}\"\nWrite your essay now (approx. 200-300 words):\n"
+    }
+  }
+}

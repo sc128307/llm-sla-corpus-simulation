@@ -1,0 +1,7 @@
+# Separate parser environment, not a historical lock. Configure parser models.
+numpy
+pandas
+pyarrow
+torch
+stanza==1.14.0
+neosca==0.1.4
